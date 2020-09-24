@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 import waveHandEmoji from "../images/wave_hand_emoji.png";
 
 function Intro() {
@@ -10,10 +11,11 @@ function Intro() {
     <Container fluid className="p-0 m-0">
       <Row>
         <Col className="pb-0 mb-0 d-flex align-items-end">
-          <Image src={waveHandEmoji} fluid className="d-block mx-auto"/>
+          <Image src={waveHandEmoji} fluid className="d-block mx-auto" />
         </Col>
-        <Col>
-          <Container>
+        <Col className="d-flex justify-content-start">
+          <Row>
+          <Container className = "p-5">
             <h5>Hello,</h5>
             <p>
               Welcome to my digital space. The culmination of my zeal for
@@ -29,7 +31,10 @@ function Intro() {
               <br />
               Shoot me a message!
             </p>
+            <Button variant="primary">Message</Button>{" "}
+            <Button variant="link" size="sm">View Resume</Button>
           </Container>
+          </Row>
         </Col>
       </Row>
     </Container>
