@@ -18,8 +18,8 @@ function Intro() {
           <Container className = "p-5">
             <h5>Hello,</h5>
             <p>
-              Welcome to my digital space. The culmination of my zeal for
-              building sites, lifting brands, and improving tech.
+              Welcome to my digital space. The culmination of my love for
+              building sites, engineering tools, and improving tech.
               <br />
               <br />
               I'm a full stack developer, actively advancing my front-end and

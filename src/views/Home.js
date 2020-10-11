@@ -3,7 +3,7 @@ import Hero from './Hero';
 import Intro from './Intro';
 import Portfolio from './Portfolio';
 import Contact from './Contact';
-
+import Footer from '../components/Footer';
 function Home() {
   return (
     <>
@@ -11,6 +11,7 @@ function Home() {
     <Intro />
     <Portfolio />
     <Contact />
+    <Footer />
     </>
   );
 }
