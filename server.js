@@ -23,16 +23,19 @@ transporter.verify((error, success) => {
   }
 });
 
-router.post("./send", (req, res, next) => {
-  let name = req.body.name;
+router.post("/send", (req, res, next) => {
+  let name = req.body.firstName + ' ' + req.body.lastName;
   let email = req.body.email;
+  let phone = req.body.phoneNumber;
+  let company = req.body.company;
+  let animal = req.body.favoriteAnimal;
   let message = req.body.message;
-  let content = `name: ${name} \n email: ${email} \n message: ${message} `;
+  let content = `name: ${name} \n email: ${email} \n phone: ${phone} \n company: ${company} \n animal: ${animal} \n message: \n ${message} `;
 
   let mail = {
     from: name,
     to: "amarrokalboffman@gmail.com",
-    subject: "Message from Portfolio",
+    subject: `Portfolio - ${name}`,
     text: content,
   };
 

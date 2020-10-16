@@ -1,12 +1,43 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 function Contact() {
-const [firstName, setFirstName] = useState('First Name');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [company, setCompany] = useState("");
+  const [favoriteAnimal, setFavoriteAnimal] = useState("");
+
+  function handleSubmit(event) {
+    const data = {
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      message,
+      favoriteAnimal,
+      company
+    };
+    event.preventDefault();
+    axios({
+      method: "POST",
+      url: "http://localhost:5000/send",
+      data: data,
+    }).then((response) => {
+      if (response.data.status === "success") {
+        alert("Message Sent!");
+      } else if (response.data.status === "fail") {
+        alert("Message failed to send");
+      }
+    });
+  }
   return (
     <Container fluid>
       <Row>
@@ -25,38 +56,74 @@ const [firstName, setFirstName] = useState('First Name');
           >
             I'd love to hear it!
           </h5>
-          <Form>
-              <Form.Row>
-                  <Col>
-            <Form.Group controlId="formBasicFirstName">
-              <Form.Control placeholder="First Name" />
-            </Form.Group>
-                  </Col>
-                  <Col>
-            <Form.Group controlId="formBasicLastName">
-              <Form.Control placeholder="Last Name" />
-            </Form.Group>
-                  </Col>
-              </Form.Row>
+          <Form
+            id="contact-form"
+            onSubmit={(e) => handleSubmit(e)}
+            method="POST"
+          >
+            <Form.Row>
+              <Col>
+                <Form.Group controlId="formBasicFirstName">
+                  <Form.Control
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="formBasicLastName">
+                  <Form.Control
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Form.Row>
             <Form.Group controlId="formBasicPhoneNumber">
-              <Form.Control placeholder="Phone Number" />
+              <Form.Control
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="Email Address" />
+              <Form.Control
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicCompany">
+              <Form.Control
+                placeholder="Company"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="formBasicMessage">
-              <Form.Control as="textarea" placeholder="Message" />
+              <Form.Control
+                as="textarea"
+                placeholder="Message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
             </Form.Group>
 
             <Form.Group controlId="formBasicFavoriteAnimal">
-            <Form.Label>Bonus</Form.Label>
-              <Form.Control placeholder="Favorite Animal" />
+              <Form.Label>Bonus</Form.Label>
+              <Form.Control
+                placeholder="Favorite Animal"
+                value={favoriteAnimal}
+                onChange={(e) => setFavoriteAnimal(e.target.value)}
+              />
             </Form.Group>
-            <Row style={{justifyContent: 'center'}}>
-
-            <Button variant="primary" type="submit" style={{flex: 0.25}}>
-              Submit
-            </Button>
+            <Row style={{ justifyContent: "center" }}>
+              <Button variant="primary" type="submit" style={{ flex: 0.25 }}>
+                Submit
+              </Button>
             </Row>
           </Form>
         </Col>
