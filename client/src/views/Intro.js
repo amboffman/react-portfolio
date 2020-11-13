@@ -32,7 +32,7 @@ function Intro() {
               Shoot me a message!
             </p>
             <Button variant="primary">Message</Button>{" "}
-            <Button variant="link" size="sm">View Resume</Button>
+            <Button variant="link" size="sm" href="https://docs.google.com/document/d/1gCP0NVtWigK23ieIo4WIA0Bfxb4y9tm7ukmsJGFOiYQ/edit?usp=sharing" target="_blank">View Resume</Button>
           </Container>
           </Row>
         </Col>

@@ -9,8 +9,8 @@ const transport = {
   port: 465,
   secure: true,
   auth: {
-    user: creds.USER,
-    pass: creds.PASS,
+    user: process.env.REACT_APP_MAILER_USER,
+    pass: process.env.REACT_APP_MAILER_PASS,
   },
 };
 const transporter = nodemailer.createTransport(transport);
@@ -24,6 +24,8 @@ transporter.verify((error, success) => {
 });
 
 router.post("/send", (req, res, next) => {
+
+  let token = req.body.token
   let name = req.body.firstName + ' ' + req.body.lastName;
   let email = req.body.email;
   let phone = req.body.phoneNumber;
@@ -39,6 +41,7 @@ router.post("/send", (req, res, next) => {
     text: content,
   };
 
+  
   transporter.sendMail(mail, (err, data) => {
     if (err) {
       res.json({ status: "fail" });

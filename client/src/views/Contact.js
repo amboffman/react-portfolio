@@ -5,8 +5,10 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Contact() {
+const recaptchaRef = React.createRef();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -16,6 +18,7 @@ function Contact() {
   const [favoriteAnimal, setFavoriteAnimal] = useState("");
 
   function handleSubmit(event) {
+    recaptchaRef.current.execute();
     const data = {
       firstName,
       lastName,
@@ -23,7 +26,7 @@ function Contact() {
       email,
       message,
       favoriteAnimal,
-      company
+      company,
     };
     event.preventDefault();
     axios({
@@ -120,7 +123,12 @@ function Contact() {
                 onChange={(e) => setFavoriteAnimal(e.target.value)}
               />
             </Form.Group>
-            <Row style={{ justifyContent: "center" }}>
+            <ReCAPTCHA 
+            ref={recaptchaRef}
+            size="invisible"
+            sitekey="6Lf889cZAAAAAEyvx7f_Oq36794e9PAggJqeE5zr" 
+            onChange={(value)=>{console.log('ReCaptcha', value)}}/>
+            <Row style={{ justifyContent: "center", marginTop: 10 }}>
               <Button variant="primary" type="submit" style={{ flex: 0.25 }}>
                 Submit
               </Button>
