@@ -13,57 +13,78 @@ function ProjectCard(props) {
   function icon(icon) {
     switch (icon) {
       case "controller":
-          return (
-              <GiRetroController
-                style={
-                  hover
-                    ? { fontSize: 75, alignSelf: "center" }
-                    : { fontSize: 50, alignSelf: "center" }
-                }
-                onClick={()=>{window.open(props.link,'_blank')}}
-              />
-          );
-        break;
+        return (
+          <GiRetroController
+            style={
+              hover
+                ? { fontSize: 75, alignSelf: "center" }
+                : { fontSize: 50, alignSelf: "center" }
+            }
+            onClick={() => {
+              window.open(props.link, "_blank");
+            }}
+          />
+        );
       case "globe":
-          return (
-            <GiGlobe
-              style={
-                hover
-                  ? { fontSize: 75, alignSelf: "center" }
-                  : { fontSize: 50, alignSelf: "center" }
-              }
-              onClick={()=>{window.open(props.link,'_blank')}}
-            />
-          );
-        break;
+        return (
+          <GiGlobe
+            style={
+              hover
+                ? { fontSize: 75, alignSelf: "center" }
+                : { fontSize: 50, alignSelf: "center" }
+            }
+            onClick={() => {
+              window.open(props.link, "_blank");
+            }}
+          />
+        );
       case "food":
-          return (
-            <GiFoodTruck
-              style={
-                hover
-                  ? { fontSize: 75, alignSelf: "center" }
-                  : { fontSize: 50, alignSelf: "center" }
-              }
-              onClick={()=>{window.open(props.link,'_blank')}}
-            />
-          );
-        break;
+        return (
+          <GiFoodTruck
+            style={
+              hover
+                ? { fontSize: 75, alignSelf: "center" }
+                : { fontSize: 50, alignSelf: "center" }
+            }
+            onClick={() => {
+              window.open(props.link, "_blank");
+            }}
+          />
+        );
       case "gps":
-          return (
-            <GiPathDistance
-              style={
-                hover
-                  ? { fontSize: 75, alignSelf: "center" }
-                  : { fontSize: 50, alignSelf: "center" }
-              }
-              onClick={()=>{window.open(props.link,'_blank')}}
-            />
-          );
-        break;
+        return (
+          <GiPathDistance
+            style={
+              hover
+                ? { fontSize: 75, alignSelf: "center" }
+                : { fontSize: 50, alignSelf: "center" }
+            }
+            onClick={() => {
+              window.open(props.link, "_blank");
+            }}
+          />
+        );
+      default:
+        return (
+          <GiPathDistance
+            style={
+              hover
+                ? { fontSize: 75, alignSelf: "center" }
+                : { fontSize: 50, alignSelf: "center" }
+            }
+            onClick={() => {
+              window.open(props.link, "_blank");
+            }}
+          />
+        );
     }
   }
   return (
-    <Card bg={props.color} text={"white"} style={{ width: "15rem", marginBottom: 30 }}>
+    <Card
+      bg={props.color}
+      text={"white"}
+      style={{ width: "15rem", marginBottom: 30 }}
+    >
       <Card.Title
         href={props.link}
         onMouseEnter={() => {
