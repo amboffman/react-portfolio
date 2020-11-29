@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import ProjectCard from "../components/ProjectCard";
 import profileInfo from "../library/profileInfo";
-import {
-  GiRetroController,
-  GiGlobe,
-  GiFoodTruck,
-  GiPathDistance,
-} from "react-icons/gi";
 
 function Portfolio() {
-  const [hoverGame, setHoverGame] = useState(false);
-  const [hoverGlobe, setHoverGlobe] = useState(false);
-  const [hoverMood, setHoverMood] = useState(false);
-  const [hoverWorkout, setHoverWorkout] = useState(false);
   return (
     <Container
       fluid

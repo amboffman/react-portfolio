@@ -14,13 +14,14 @@ function ProjectCard(props) {
     switch (icon) {
       case "controller":
           return (
-            <GiRetroController
-              style={
-                hover
-                  ? { fontSize: 75, alignSelf: "center" }
-                  : { fontSize: 50, alignSelf: "center" }
-              }
-            />
+              <GiRetroController
+                style={
+                  hover
+                    ? { fontSize: 75, alignSelf: "center" }
+                    : { fontSize: 50, alignSelf: "center" }
+                }
+                onClick={()=>{window.open(props.link,'_blank')}}
+              />
           );
         break;
       case "globe":
@@ -31,6 +32,7 @@ function ProjectCard(props) {
                   ? { fontSize: 75, alignSelf: "center" }
                   : { fontSize: 50, alignSelf: "center" }
               }
+              onClick={()=>{window.open(props.link,'_blank')}}
             />
           );
         break;
@@ -42,6 +44,7 @@ function ProjectCard(props) {
                   ? { fontSize: 75, alignSelf: "center" }
                   : { fontSize: 50, alignSelf: "center" }
               }
+              onClick={()=>{window.open(props.link,'_blank')}}
             />
           );
         break;
@@ -53,6 +56,7 @@ function ProjectCard(props) {
                   ? { fontSize: 75, alignSelf: "center" }
                   : { fontSize: 50, alignSelf: "center" }
               }
+              onClick={()=>{window.open(props.link,'_blank')}}
             />
           );
         break;
