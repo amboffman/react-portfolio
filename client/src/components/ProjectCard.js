@@ -63,7 +63,7 @@ function ProjectCard(props) {
     }
   }
   return (
-    <Card bg={props.color} text={"white"} style={{ width: "15rem" }}>
+    <Card bg={props.color} text={"white"} style={{ width: "15rem", marginBottom: 30 }}>
       <Card.Title
         href={props.link}
         onMouseEnter={() => {

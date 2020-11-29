@@ -42,10 +42,9 @@ const recaptchaRef = React.createRef();
     });
   }
   return (
-    <Container fluid>
+    <Container fluid="md">
       <Row>
-        <Col></Col>
-        <Col style={{ flex: 1 }}>
+        <Col>
           <h3 style={{ textAlign: "center", marginTop: 30 }}>
             What could you accomplish with a full stack developer at your
             fingertips?
@@ -135,7 +134,6 @@ const recaptchaRef = React.createRef();
             </Row>
           </Form>
         </Col>
-        <Col></Col>
       </Row>
     </Container>
   );
