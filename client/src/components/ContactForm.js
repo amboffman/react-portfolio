@@ -72,7 +72,9 @@ function ContactForm() {
           `mailto:amarrokalboffman@gmail.com?subject=Portfolio%20Response&body=Hello%20Anthony,%0D%0A${message}%0D%0AP.S.%0D%0A${favoriteAnimal}%20is%20my%20favorite%20animal.%0D%0ABest,%0D%0A${firstName}%20${lastName}%0D%0A${email}%0D%0A${phoneNumber}%0D%0A${company}`,
           "_blank"
         )
-      setSendingMessage(false)      }
+      setSendingMessage(false)
+      setSubmission(true)
+          }
         
       );
   }
