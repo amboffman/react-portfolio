@@ -9,7 +9,7 @@ import waveHandEmoji from "../images/wave_hand_emoji.png";
 function Intro() {
   return (
     <Container fluid className="p-0 m-0">
-      <Row>
+      <Row className='m-0 p-0'>
         <Col className="pb-0 mb-0 d-flex align-items-end" sm>
           <Image src={waveHandEmoji} fluid className="d-block mx-auto" />
         </Col>

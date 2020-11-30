@@ -10,7 +10,6 @@ import HeroSubheading from "../components/HeroSubheading";
 function Hero() {
   return (
     <Container fluid className ="p-0 m-0">
-      <Row>
         <Col className ="p-0 m-0">
           <Jumbotron fluid>
             <Container>
@@ -22,7 +21,6 @@ function Hero() {
             </Container>
           </Jumbotron>
         </Col>
-      </Row>
     </Container>
   );
 }
