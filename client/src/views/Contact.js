@@ -7,24 +7,7 @@ import ContactForm from "../components/ContactForm"
 function Contact() {
   return (
     <Container fluid="md">
-      <Row>
-        <Col>
-          <h3 style={{ textAlign: "center", marginTop: 30 }}>
-            What could you accomplish with a full stack developer at your
-            fingertips?
-          </h3>
-          <h5
-            style={{
-              textAlign: "center",
-              color: "deeppink",
-              paddingBottom: 20,
-            }}
-          >
-            I'd love to hear it!
-          </h5>
           <ContactForm />
-        </Col>
-      </Row>
     </Container>
   );
 }
