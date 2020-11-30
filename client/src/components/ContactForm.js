@@ -55,7 +55,7 @@ function ContactForm() {
     fetchGif(data);
     axios({
       method: "POST",
-      url: "http://localhost:5000/sen",
+      url: "http://localhost:5000/send",
       data: data,
     })
       .then((response) => {
