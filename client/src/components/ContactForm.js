@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Fade from "react-bootstrap/Fade";
+import Spinner from "react-bootstrap/Spinner";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -19,6 +20,7 @@ function ContactForm() {
   const [favoriteAnimal, setFavoriteAnimal] = useState("");
   const [gif, setGif] = useState("");
   const [submission, setSubmission] = useState(false);
+  const [sendingMessage, setSendingMessage] = useState(false);
   const [gifError, setGifError] = useState(false);
   const axios = require("axios");
   const [open, setOpen] = useState(false);
@@ -45,6 +47,7 @@ function ContactForm() {
 
   function handleSubmit(event) {
     recaptchaRef.current.execute();
+    setSendingMessage(true)
     const data = {
       firstName,
       lastName,
@@ -57,46 +60,54 @@ function ContactForm() {
     event.preventDefault();
     axios({
       method: "POST",
-      url: "http://localhost:5000/send",
+      url: "http://localhost:5000/sen",
       data: data,
     })
       .then((response) => {
         fetchGif(data);
+        setSendingMessage(false)
       })
-      .catch(() => window.open(`mailto:amarrokalboffman@gmail.com?subject=Portfolio%20Response&body=Hello%20Anthony,%0D%0A${message}%0D%0AP.S.%0D%0A${favoriteAnimal}%20is%20my%20favorite%20animal.%0D%0ABest,%0D%0A${firstName}%20${lastName}%0D%0A${email}%0D%0A${phoneNumber}%0D%0A${company}`,"_blank"));
+      .catch(() =>{
+        window.open(
+          `mailto:amarrokalboffman@gmail.com?subject=Portfolio%20Response&body=Hello%20Anthony,%0D%0A${message}%0D%0AP.S.%0D%0A${favoriteAnimal}%20is%20my%20favorite%20animal.%0D%0ABest,%0D%0A${firstName}%20${lastName}%0D%0A${email}%0D%0A${phoneNumber}%0D%0A${company}`,
+          "_blank"
+        )
+      setSendingMessage(false)      }
+        
+      );
   }
   return (
     <Row>
       <Col>
-      <Container style={{height: 600}}>
-        {submission ? (
-          <>
-            <Fade in={open} timeout={25000}>
-              <div>
-                <h3 style={{ textAlign: "center", marginTop: 30 }}>
-                  Thank you for taking the time to reach out! I'll get back to
-                  you shortly.
-                </h3>
-                {gifError ? null : (
-                  <>
-                    <h5
-                      style={{
-                        textAlign: "center",
-                        color: "deeppink",
-                        paddingBottom: 20,
-                      }}
-                    >
-                      In the meantime, enjoy this {favoriteAnimal.toLowerCase()}{" "}
-                      gif!
-                    </h5>
-                    <Gif gif={gif} />
-                  </>
-                )}
-              </div>
-            </Fade>
-          </>
-        ) : (
-          <>
+        <Container style={{ height: 600 }}>
+          {submission ? (
+            <>
+              <Fade in={open} timeout={25000}>
+                <div>
+                  <h3 style={{ textAlign: "center", marginTop: 30 }}>
+                    Thank you for taking the time to reach out! I'll get back to
+                    you shortly.
+                  </h3>
+                  {gifError ? null : (
+                    <>
+                      <h5
+                        style={{
+                          textAlign: "center",
+                          color: "deeppink",
+                          paddingBottom: 20,
+                        }}
+                      >
+                        In the meantime, enjoy this{" "}
+                        {favoriteAnimal.toLowerCase()} gif!
+                      </h5>
+                      <Gif gif={gif} />
+                    </>
+                  )}
+                </div>
+              </Fade>
+            </>
+          ) : (
+            <>
               <div>
                 <h3 style={{ textAlign: "center", marginTop: 30 }}>
                   What could you accomplish with a full stack developer at your
@@ -184,18 +195,37 @@ function ContactForm() {
                     }}
                   />
                   <Row style={{ justifyContent: "center", marginTop: 10 }}>
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      style={{ flex: 0.25 }}
-                    >
-                      Submit
-                    </Button>
+                    {sendingMessage ? (
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        style={{ flex: 0.25 }}
+                        disabled
+                      >
+                        <Spinner
+                          as="span"
+                          animation="grow"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                          style={{marginRight: 15}}
+                        />
+                        Sending...
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        style={{ flex: 0.25 }}
+                      >
+                        Submit
+                      </Button>
+                    )}
                   </Row>
                 </Form>
               </div>
-          </>
-        )}
+            </>
+          )}
         </Container>
       </Col>
     </Row>
