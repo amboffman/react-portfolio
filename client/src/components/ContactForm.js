@@ -55,7 +55,6 @@ function ContactForm() {
       company,
     };
     event.preventDefault();
-    fetchGif(data);
     axios({
       method: "POST",
       url: "http://localhost:5000/send",
