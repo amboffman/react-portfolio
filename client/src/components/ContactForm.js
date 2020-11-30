@@ -73,7 +73,7 @@ function ContactForm() {
           "_blank"
         )
       setSendingMessage(false)
-      setSubmission(true)
+      fetchGif(data);
           }
         
       );
