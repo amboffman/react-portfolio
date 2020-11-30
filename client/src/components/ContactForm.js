@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import Fade from "react-bootstrap/Fade";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -20,6 +21,7 @@ function ContactForm() {
   const [submission, setSubmission] = useState(false);
   const [gifError, setGifError] = useState(false);
   const axios = require("axios");
+  const [open, setOpen] = useState(false);
 
   function fetchGif(data) {
     axios
@@ -33,6 +35,7 @@ function ContactForm() {
         setGif(response.data.data[0].images.downsized.url);
         console.log(response.data.data[0].images.downsized.url);
         setSubmission(true);
+        setOpen(true);
       })
       .catch(() => {
         setGifError(true);
@@ -52,6 +55,7 @@ function ContactForm() {
       company,
     };
     event.preventDefault();
+    fetchGif(data);
     axios({
       method: "POST",
       url: "http://localhost:5000/send",
@@ -65,8 +69,11 @@ function ContactForm() {
   return (
     <Row>
       <Col>
+      <Container style={{height: 600}}>
         {submission ? (
-              <>
+          <>
+            <Fade in={open} timeout={25000}>
+              <div>
                 <h3 style={{ textAlign: "center", marginTop: 30 }}>
                   Thank you for taking the time to reach out! I'll get back to
                   you shortly.
@@ -86,102 +93,111 @@ function ContactForm() {
                     <Gif gif={gif} />
                   </>
                 )}
-              </>
+              </div>
+            </Fade>
+          </>
         ) : (
           <>
-            <h3 style={{ textAlign: "center", marginTop: 30 }}>
-              What could you accomplish with a full stack developer at your
-              fingertips?
-            </h3>
-            <h5
-              style={{
-                textAlign: "center",
-                color: "deeppink",
-                paddingBottom: 20,
-              }}
-            >
-              I'd love to hear it!
-            </h5>
-            <Form
-              id="contact-form"
-              onSubmit={(e) => handleSubmit(e)}
-              method="POST"
-            >
-              <Form.Row>
-                <Col>
-                  <Form.Group controlId="formBasicFirstName">
+              <div>
+                <h3 style={{ textAlign: "center", marginTop: 30 }}>
+                  What could you accomplish with a full stack developer at your
+                  fingertips?
+                </h3>
+                <h5
+                  style={{
+                    textAlign: "center",
+                    color: "deeppink",
+                    paddingBottom: 20,
+                  }}
+                >
+                  I'd love to hear it!
+                </h5>
+                <Form
+                  id="contact-form"
+                  onSubmit={(e) => handleSubmit(e)}
+                  method="POST"
+                >
+                  <Form.Row>
+                    <Col>
+                      <Form.Group controlId="formBasicFirstName">
+                        <Form.Control
+                          placeholder="First Name"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col>
+                      <Form.Group controlId="formBasicLastName">
+                        <Form.Control
+                          placeholder="Last Name"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Form.Row>
+                  <Form.Group controlId="formBasicPhoneNumber">
                     <Form.Control
-                      placeholder="First Name"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="Phone Number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="formBasicLastName">
+                  <Form.Group controlId="formBasicEmail">
                     <Form.Control
-                      placeholder="Last Name"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
+                      type="email"
+                      placeholder="Email Address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </Form.Group>
-                </Col>
-              </Form.Row>
-              <Form.Group controlId="formBasicPhoneNumber">
-                <Form.Control
-                  placeholder="Phone Number"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Control
-                  type="email"
-                  placeholder="Email Address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicCompany">
-                <Form.Control
-                  placeholder="Company"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicMessage">
-                <Form.Control
-                  as="textarea"
-                  placeholder="Message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                />
-              </Form.Group>
+                  <Form.Group controlId="formBasicCompany">
+                    <Form.Control
+                      placeholder="Company"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicMessage">
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Message"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                  </Form.Group>
 
-              <Form.Group controlId="formBasicFavoriteAnimal">
-                <Form.Label>Bonus</Form.Label>
-                <Form.Control
-                  placeholder="Favorite Animal"
-                  value={favoriteAnimal}
-                  onChange={(e) => setFavoriteAnimal(e.target.value)}
-                />
-              </Form.Group>
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                size="invisible"
-                sitekey="6Lf889cZAAAAAEyvx7f_Oq36794e9PAggJqeE5zr"
-                onChange={(value) => {
-                  console.log("ReCaptcha", value);
-                }}
-              />
-              <Row style={{ justifyContent: "center", marginTop: 10 }}>
-                <Button variant="primary" type="submit" style={{ flex: 0.25 }}>
-                  Submit
-                </Button>
-              </Row>
-            </Form>
+                  <Form.Group controlId="formBasicFavoriteAnimal">
+                    <Form.Label>Bonus</Form.Label>
+                    <Form.Control
+                      placeholder="Favorite Animal"
+                      value={favoriteAnimal}
+                      onChange={(e) => setFavoriteAnimal(e.target.value)}
+                    />
+                  </Form.Group>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    size="invisible"
+                    sitekey="6Lf889cZAAAAAEyvx7f_Oq36794e9PAggJqeE5zr"
+                    onChange={(value) => {
+                      console.log("ReCaptcha", value);
+                    }}
+                  />
+                  <Row style={{ justifyContent: "center", marginTop: 10 }}>
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      style={{ flex: 0.25 }}
+                    >
+                      Submit
+                    </Button>
+                  </Row>
+                </Form>
+              </div>
           </>
         )}
+        </Container>
       </Col>
     </Row>
   );
