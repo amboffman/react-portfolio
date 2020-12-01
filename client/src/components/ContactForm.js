@@ -47,7 +47,7 @@ function ContactForm() {
 
   function handleSubmit(event) {
     recaptchaRef.current.execute();
-    setSendingMessage(true)
+    setSendingMessage(true);
     const data = {
       firstName,
       lastName,
@@ -65,18 +65,16 @@ function ContactForm() {
     })
       .then((response) => {
         fetchGif(data);
-        setSendingMessage(false)
+        setSendingMessage(false);
       })
-      .catch(() =>{
+      .catch(() => {
         window.open(
           `mailto:amarrokalboffman@gmail.com?subject=Portfolio%20Response&body=Hello%20Anthony,%0D%0A${message}%0D%0AP.S.%0D%0A${favoriteAnimal}%20is%20my%20favorite%20animal.%0D%0ABest,%0D%0A${firstName}%20${lastName}%0D%0A${email}%0D%0A${phoneNumber}%0D%0A${company}`,
           "_blank"
-        )
-      setSendingMessage(false)
-      fetchGif(data);
-          }
-        
-      );
+        );
+        setSendingMessage(false);
+        fetchGif(data);
+      });
   }
   return (
     <Row>
@@ -210,7 +208,7 @@ function ContactForm() {
                           size="sm"
                           role="status"
                           aria-hidden="true"
-                          style={{marginRight: 15}}
+                          style={{ marginRight: 15 }}
                         />
                         Sending...
                       </Button>

@@ -19,12 +19,17 @@ function Portfolio() {
         <strong>506</strong> contributions and counting!
       </p>
       <Row style={{ justifyContent: "space-around" }}>
-{profileInfo.projects.map(
-project=>{ return(
-  <ProjectCard title={project.title} description={project.description} link={project.link} color={project.color} icon={project.icon}/>
-)
-}
-)}
+        {profileInfo.projects.map((project) => {
+          return (
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              link={project.link}
+              color={project.color}
+              icon={project.icon}
+            />
+          );
+        })}
       </Row>
     </Container>
   );
