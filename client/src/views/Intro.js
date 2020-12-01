@@ -30,7 +30,7 @@ function Intro() {
               <br />
               Shoot me a message!
             </p>
-            <Button variant="primary">Message</Button>{" "}
+            <Button variant="primary" href="#contact">Message</Button>{" "}
             <Button
               variant="link"
               size="sm"
