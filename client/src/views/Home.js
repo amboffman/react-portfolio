@@ -10,11 +10,9 @@ function Home() {
       <Hero />
       <Intro />
       <Portfolio />
-      <a name="contact">
         <div id="contact">
           <Contact />
         </div>
-      </a>
       <Footer />
     </>
   );
