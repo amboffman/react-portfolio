@@ -22,6 +22,7 @@ function Portfolio() {
         {profileInfo.projects.map((project) => {
           return (
             <ProjectCard
+              key={project.title}
               title={project.title}
               description={project.description}
               link={project.link}
