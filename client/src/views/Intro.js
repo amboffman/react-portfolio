@@ -9,13 +9,12 @@ import waveHandEmoji from "../images/wave_hand_emoji.png";
 function Intro() {
   return (
     <Container fluid className="p-0 m-0">
-      <Row>
-        <Col className="pb-0 mb-0 d-flex align-items-end">
+      <Row className="m-0 p-0">
+        <Col className="pb-0 mb-0 d-flex align-items-end" sm>
           <Image src={waveHandEmoji} fluid className="d-block mx-auto" />
         </Col>
-        <Col className="d-flex justify-content-start">
-          <Row>
-          <Container className = "p-5">
+        <Col className="d-flex justify-content-start" sm>
+          <Container className="p-5">
             <h5>Hello,</h5>
             <p>
               Welcome to my digital space. The culmination of my love for
@@ -31,10 +30,18 @@ function Intro() {
               <br />
               Shoot me a message!
             </p>
-            <Button variant="primary">Message</Button>{" "}
-            <Button variant="link" size="sm">View Resume</Button>
+            <Button variant="primary" href="#contact">
+              Message
+            </Button>{" "}
+            <Button
+              variant="link"
+              size="sm"
+              href="https://docs.google.com/document/d/1gCP0NVtWigK23ieIo4WIA0Bfxb4y9tm7ukmsJGFOiYQ/edit?usp=sharing"
+              target="_blank"
+            >
+              View Resume
+            </Button>
           </Container>
-          </Row>
         </Col>
       </Row>
     </Container>

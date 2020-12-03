@@ -10,7 +10,9 @@ function Home() {
       <Hero />
       <Intro />
       <Portfolio />
-      <Contact />
+        <div id="contact">
+          <Contact />
+        </div>
       <Footer />
     </>
   );
