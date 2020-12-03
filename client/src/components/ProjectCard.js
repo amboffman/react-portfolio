@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useRef } from "react";
 import Card from "react-bootstrap/Card";
 import {
   GiRetroController,
@@ -7,33 +7,10 @@ import {
   GiPathDistance,
 } from "react-icons/gi";
 import Button from "react-bootstrap/Button";
-import { useSpring, animated } from "react-spring";
+import HoverEffect from "./HoverEffect";
 
 function ProjectCard(props) {
-  const targetRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  useLayoutEffect(() => {
-    if (targetRef.current) {
-      setDimensions({
-        width: targetRef.current.offsetWidth,
-        height: targetRef.current.offsetHeight,
-      });
-    }
-  }, []);
-
-  const calc = (x, y) => [
-    -(y - window.innerHeight / 2) / dimensions.height,
-    (x - window.innerWidth / 2) / dimensions.width,
-    1.1,
-  ];
-  const trans = (x, y, s) =>
-    `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
-
-  const [angle, set] = useSpring(() => ({
-    xys: [0, 0, 1],
-    config: { mass: 5, tension: 350, friction: 40 },
-  }));
-
+  const cardRef = useRef();
   function icon(icon) {
     switch (icon) {
       case "controller":
@@ -79,20 +56,12 @@ function ProjectCard(props) {
     }
   }
   return (
-    <animated.div
-      onMouseMove={({ clientX: x, clientY: y }) => {
-        set({ xys: calc(x, y) });
-      }}
-      onMouseLeave={() => {
-        set({ xys: [0, 0, 1] });
-      }}
-      style={{ transform: angle.xys.interpolate(trans) }}
-    >
+    <HoverEffect ref={cardRef}>
       <Card
         bg={props.color}
         text={"white"}
         style={{ width: "15rem", marginBottom: 30 }}
-        ref={targetRef}
+        ref={cardRef}
       >
         <Card.Title
           href={props.link}
@@ -104,17 +73,7 @@ function ProjectCard(props) {
             fontSize: 50,
           }}
         >
-          <animated.div
-            onMouseMove={({ clientX: x, clientY: y }) => {
-              set({ xys: calc(x, y) });
-            }}
-            onMouseLeave={() => {
-              set({ xys: [0, 0, 1] });
-            }}
-            style={{ transform: angle.xys.interpolate(trans) }}
-          >
-            {icon(props.icon)}
-          </animated.div>
+          <HoverEffect ref={cardRef}>{icon(props.icon)}</HoverEffect>
         </Card.Title>
         <Card.Header>{props.title}</Card.Header>
         <Card.Body>
@@ -124,7 +83,7 @@ function ProjectCard(props) {
           </Button>
         </Card.Body>
       </Card>
-    </animated.div>
+    </HoverEffect>
   );
 }
 
